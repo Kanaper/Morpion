@@ -6,7 +6,7 @@ import fr.kanaper.morpion.jeu.Game;
 public class Main {
 
     public static void main(String[] args) {
-        new Game().setVisible(true);
-        // new MainMenuWindow().setVisible(true);
+        // new Game().setVisible(true);
+        new MainMenuWindow().setVisible(true);
     }
 }

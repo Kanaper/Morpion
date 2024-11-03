@@ -1,38 +1,39 @@
 package fr.kanaper.morpion.component;
 
-import javax.swing.JButton;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
+import java.awt.BasicStroke;
+import java.awt.RenderingHints;
+import java.awt.AlphaComposite;
 
-import javax.swing.BorderFactory;
-import javax.swing.border.Border;
+import javax.swing.JButton;
 
 public class KanButton extends JButton {
 
-    private int cX;
-    private int cY;
+    private String buttonName;
+    private boolean mouseStatement = false;
 
-    public KanButton(String title, int cX, int cY) {
+    public KanButton(String title, String buttonName) {
         super(title);
 
         this.setBorderPainted(false);
         this.setFocusPainted(false);
         this.setContentAreaFilled(false);
 
-        Border lineborder = BorderFactory.createLineBorder(Color.black, 1);
-        this.setBorder(lineborder);
+        this.addMouseListener(new KanButtonListener(this));
 
-        this.setBounds(this.cX, this.cY, 75, 75);
-
-        this.cX = cX;
-        this.cY = cY;
+        this.buttonName = buttonName;
 
         this.setOpaque(false);
     }
 
-    public KanButton(int cX, int cY) {
-        this("", cX, cY);
+    public KanButton(String buttonName) {
+        this("", buttonName);
+    }
+
+    public boolean setMouseStatement(boolean statement) {
+        return mouseStatement = statement;
     }
 
     @Override
@@ -40,8 +41,38 @@ public class KanButton extends JButton {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
 
-        g2d.setColor(Color.RED);
-        g2d.fillRect(this.cX, this.cY, 50, 50);
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+        if (mouseStatement) {
+            float opacite = 0.2f;
+            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacite));
+            g2d.setColor(Color.GRAY);
+            g2d.fillRoundRect(5, 5, 185, 85, 10, 10);
+
+            opacite = 1f;
+            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacite));
+            g2d.setStroke(new BasicStroke(3));
+            g2d.setColor(Color.BLACK);
+            g2d.drawRoundRect(5, 5, 185, 85, 10, 10);
+
+            g2d.setColor(Color.BLACK);
+            this.setFont(this.getFont().deriveFont(45f));
+            g2d.drawString(buttonName, 50, 60);
+        } else {
+            float opacite = 0.2f;
+            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacite));
+            g2d.setColor(Color.LIGHT_GRAY);
+            g2d.fillRoundRect(5, 5, 185, 85, 10, 10);
+
+            opacite = 1f;
+            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacite));
+            g2d.setStroke(new BasicStroke(3));
+            g2d.setColor(Color.BLACK);
+            g2d.drawRoundRect(5, 5, 185, 85, 10, 10);
+
+            g2d.setColor(Color.BLACK);
+            this.setFont(this.getFont().deriveFont(45f));
+            g2d.drawString(buttonName, 50, 60);
+        }
     }
 }

@@ -16,16 +16,18 @@ public class MainMenuButton extends JPanel {
     public MainMenuButton() {
         super();
         this.setLayout(null);
-        this.setBackground(Color.LIGHT_GRAY);
 
-        Border lineborder = BorderFactory.createLineBorder(Color.black, 1);
-        this.setBorder(lineborder);
-
-        KanButton play = new KanButton("Play", PANHEIGHT + 50, PANWIDTH + 50);
+        KanButton play = new KanButton("Play");
+        play.setBounds(PANWIDTH / 2 - 250, PANHEIGHT / 2 - 50, 200, 100);
+        play.addActionListener(new MainMenuButtonListener());
         this.add(play);
 
-        KanButton quit = new KanButton("quit", PANHEIGHT + 150, PANWIDTH + 250);
+        KanButton quit = new KanButton("quit");
+        quit.setBounds(PANWIDTH / 2 + 50, PANHEIGHT / 2 - 50, 200, 100);
+        quit.addActionListener(new MainMenuButtonListener());
         this.add(quit);
+
+        this.setOpaque(false);
     }
 
 }

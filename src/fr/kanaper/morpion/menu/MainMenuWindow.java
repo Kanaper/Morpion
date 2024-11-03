@@ -2,9 +2,7 @@ package fr.kanaper.morpion.menu;
 
 import javax.swing.JFrame;
 
-import javax.swing.border.Border;
-import javax.swing.BorderFactory;
-
+import java.awt.AlphaComposite;
 import java.awt.Color;
 
 public class MainMenuWindow extends JFrame {
@@ -19,18 +17,13 @@ public class MainMenuWindow extends JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setLayout(null);
-        this.getContentPane().setBackground(Color.LIGHT_GRAY);
-
-        Border lineborder = BorderFactory.createLineBorder(Color.black, 1);
+        this.getContentPane().setBackground(new Color(10, 10, 10, 10));
 
         MainMenuTitle title = new MainMenuTitle();
-        // title.setBounds(0, 50, WIDTH, 150);
-        title.setBorder(lineborder);
         this.add(title);
 
         MainMenuButton button = new MainMenuButton();
         button.setBounds(100, 300, WIDTH - 200, HEIGHT - 400);
-        button.setBorder(lineborder);
         this.add(button);
 
         this.setVisible(true);
