@@ -12,7 +12,7 @@ import javax.swing.JButton;
 public class KanButton extends JButton {
 
     private String buttonName;
-    private boolean mouseStatement = false;
+    private boolean mouseClicked = false;
 
     public KanButton(String title, String buttonName) {
         super(title);
@@ -32,8 +32,8 @@ public class KanButton extends JButton {
         this("", buttonName);
     }
 
-    public boolean setMouseStatement(boolean statement) {
-        return mouseStatement = statement;
+    public boolean setMouseClicked(boolean clicked) {
+        return this.mouseClicked = clicked;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class KanButton extends JButton {
 
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        if (mouseStatement) {
+        if (this.mouseClicked) {
             float opacite = 0.2f;
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacite));
             g2d.setColor(Color.GRAY);
@@ -55,8 +55,7 @@ public class KanButton extends JButton {
             g2d.setColor(Color.BLACK);
             g2d.drawRoundRect(5, 5, 185, 85, 10, 10);
 
-            g2d.setColor(Color.BLACK);
-            this.setFont(this.getFont().deriveFont(45f));
+            g2d.setFont(g2d.getFont().deriveFont(45f));
             g2d.drawString(buttonName, 50, 60);
         } else {
             float opacite = 0.2f;
@@ -70,9 +69,9 @@ public class KanButton extends JButton {
             g2d.setColor(Color.BLACK);
             g2d.drawRoundRect(5, 5, 185, 85, 10, 10);
 
-            g2d.setColor(Color.BLACK);
-            this.setFont(this.getFont().deriveFont(45f));
+            g2d.setFont(g2d.getFont().deriveFont(45f));
             g2d.drawString(buttonName, 50, 60);
         }
+        g2d.dispose();
     }
 }

@@ -17,12 +17,14 @@ public class KanButtonListener implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        this.button.setMouseStatement(true);
+        this.button.setMouseClicked(true);
+        this.button.repaint();
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        this.button.setMouseStatement(false);
+        this.button.setMouseClicked(false);
+        this.button.repaint();
     }
 
     @Override
