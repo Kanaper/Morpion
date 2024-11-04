@@ -1,9 +1,9 @@
 package fr.kanaper.morpion.component;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class KanButtonGridListener implements MouseListener {
+public class KanButtonGridListener implements ActionListener {
 
     private KanButtonGrid button;
 
@@ -12,29 +12,14 @@ public class KanButtonGridListener implements MouseListener {
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-        this.button.setMouseClicked(true);
-        this.button.repaint();
+    public void actionPerformed(ActionEvent e) {
+        if (!this.button.getFilled()) {
+            this.button.setFilled(true);
+            if (this.button.getPlayer()) {
+                this.button.setPlayer(false);
+            } else {
+                this.button.setPlayer(true);
+            }
+        }
     }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        this.button.setMouseStatement(true);
-        this.button.repaint();
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        this.button.setMouseStatement(false);
-        this.button.repaint();
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-    }
-
 }

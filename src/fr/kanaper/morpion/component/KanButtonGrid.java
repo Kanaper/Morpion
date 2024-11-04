@@ -12,35 +12,31 @@ import fr.kanaper.morpion.jeu.Grid;
 
 public class KanButtonGrid extends JButton {
 
-    private static final int CASEWIDTH = Grid.GRIDWIDTH / 3;
-    private static final int CASEHEIGHT = Grid.GRIDHEIGHT / 3;
-    private int xStart;
-    private int yStart;
-    private boolean mouseStatement = false;
+    private static final int CASEWIDTH = Grid.GRIDSIZE / 3;
+    private static final int CASEHEIGHT = Grid.GRIDSIZE / 3;
+    private boolean mouseIn = false;
     private boolean filled = false;
-    private boolean player = true;
+    private boolean player = false;
     private boolean mouseClicked = false;
 
     public KanButtonGrid(int xStart, int yStart) {
         this.setBounds(xStart, yStart, CASEWIDTH, CASEHEIGHT);
 
-        this.xStart = xStart;
-        this.yStart = yStart;
-
         this.setBorderPainted(false);
         this.setFocusPainted(false);
         this.setContentAreaFilled(false);
 
-        this.addMouseListener(new KanButtonGridListener(this));
+        this.addMouseListener(new KanButtonGridMouseListener(this));
+        this.addActionListener(new KanButtonGridListener(this));
 
     }
 
-    public void setMouseStatement(boolean statement) {
-        this.mouseStatement = statement;
+    public void setMouseInButton(boolean mousIn) {
+        this.mouseIn = mousIn;
     }
 
-    public boolean getMouseStatement() {
-        return this.mouseStatement;
+    public boolean getMouseInButton() {
+        return this.mouseIn;
     }
 
     public boolean getFilled() {
@@ -74,7 +70,7 @@ public class KanButtonGrid extends JButton {
 
         g2d.setStroke(new BasicStroke(5));
 
-        if (getMouseStatement() == true && getFilled() == false) {
+        if (getMouseInButton() == true && getFilled() == false) {
             float opacite = 0.2f;
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacite));
             g2d.setColor(Color.GRAY);
@@ -82,9 +78,30 @@ public class KanButtonGrid extends JButton {
 
             g2d.setColor(Color.BLACK);
             g2d.drawRect(0, 0, CASEWIDTH, CASEHEIGHT);
+        } else {
+            if (getFilled() == false) {
+                g2d.setColor(Color.WHITE);
+                g2d.fillRect(0, 0, CASEWIDTH, CASEHEIGHT);
+
+                g2d.setColor(Color.BLACK);
+                g2d.drawRect(0, 0, CASEWIDTH, CASEHEIGHT);
+            } else {
+                g2d.setColor(Color.WHITE);
+                g2d.fillRect(0, 0, CASEWIDTH, CASEHEIGHT);
+                if (getPlayer() == true) {
+                    g2d.setColor(Color.RED);
+                    g2d.drawLine(0, 0, CASEWIDTH, CASEHEIGHT);
+                    g2d.drawLine(CASEWIDTH, 0, 0, CASEHEIGHT);
+                } else {
+                    g2d.setColor(Color.BLUE);
+                    g2d.drawOval(0, 0, CASEWIDTH, CASEHEIGHT);
+                }
+                g2d.setColor(Color.BLACK);
+                g2d.drawRect(0, 0, CASEWIDTH, CASEHEIGHT);
+            }
         }
 
-        if (getMouseClicked() == true && getMouseStatement() == true && getFilled() == false) {
+        if (getMouseClicked() == true && getMouseInButton() == true && getFilled() == false) {
             if (getPlayer() == true) {
                 g2d.setColor(Color.RED);
                 g2d.drawLine(0, 0, CASEWIDTH, CASEHEIGHT);
