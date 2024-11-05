@@ -9,6 +9,7 @@ import java.awt.AlphaComposite;
 import javax.swing.JButton;
 
 import fr.kanaper.morpion.jeu.Grid;
+import fr.kanaper.morpion.jeu.Game;
 
 public class KanButtonGrid extends JButton {
 
@@ -16,18 +17,20 @@ public class KanButtonGrid extends JButton {
     private static final int CASEHEIGHT = Grid.GRIDSIZE / 3;
     private boolean mouseIn = false;
     private boolean filled = false;
-    private boolean player = false;
+    private Game gameWindow;
     private boolean mouseClicked = false;
 
-    public KanButtonGrid(int xStart, int yStart) {
+    public KanButtonGrid(int xStart, int yStart, Game gameWindow) {
         this.setBounds(xStart, yStart, CASEWIDTH, CASEHEIGHT);
 
         this.setBorderPainted(false);
         this.setFocusPainted(false);
         this.setContentAreaFilled(false);
 
+        this.gameWindow = gameWindow;
+
         this.addMouseListener(new KanButtonGridMouseListener(this));
-        this.addActionListener(new KanButtonGridListener(this));
+        this.addActionListener(new KanButtonGridListener(gameWindow));
 
     }
 
@@ -45,14 +48,6 @@ public class KanButtonGrid extends JButton {
 
     public void setFilled(boolean filled) {
         this.filled = filled;
-    }
-
-    public boolean getPlayer() {
-        return this.player;
-    }
-
-    public void setPlayer(boolean player) {
-        this.player = player;
     }
 
     public boolean getMouseClicked() {
@@ -88,13 +83,22 @@ public class KanButtonGrid extends JButton {
             } else {
                 g2d.setColor(Color.WHITE);
                 g2d.fillRect(0, 0, CASEWIDTH, CASEHEIGHT);
-                if (getPlayer() == true) {
-                    g2d.setColor(Color.RED);
-                    g2d.drawLine(0, 0, CASEWIDTH, CASEHEIGHT);
-                    g2d.drawLine(CASEWIDTH, 0, 0, CASEHEIGHT);
-                } else {
-                    g2d.setColor(Color.BLUE);
-                    g2d.drawOval(0, 0, CASEWIDTH, CASEHEIGHT);
+                switch (this.gameWindow.getCurrentPlayer()) {
+                    case PLAYER1:
+                        g2d.setColor(Color.RED);
+                        g2d.drawLine(0, 0, CASEWIDTH, CASEHEIGHT);
+                        g2d.drawLine(CASEWIDTH, 0, 0, CASEHEIGHT);
+                        this.setFilled(true);
+                        break;
+
+                    case PLAYER2:
+                        g2d.setColor(Color.BLUE);
+                        g2d.drawOval(0, 0, CASEWIDTH, CASEHEIGHT);
+                        this.setFilled(true);
+                        break;
+
+                    default:
+                        throw new IllegalArgumentException("Unexpected value: " + this.gameWindow.getCurrentPlayer());
                 }
                 g2d.setColor(Color.BLACK);
                 g2d.drawRect(0, 0, CASEWIDTH, CASEHEIGHT);
@@ -102,15 +106,23 @@ public class KanButtonGrid extends JButton {
         }
 
         if (getMouseClicked() == true && getMouseInButton() == true && getFilled() == false) {
-            if (getPlayer() == true) {
-                g2d.setColor(Color.RED);
-                g2d.drawLine(0, 0, CASEWIDTH, CASEHEIGHT);
-                g2d.drawLine(CASEWIDTH, 0, 0, CASEHEIGHT);
-                this.setFilled(true);
-            } else {
-                g2d.setColor(Color.BLUE);
-                g2d.drawOval(0, 0, CASEWIDTH, CASEHEIGHT);
-                this.setFilled(true);
+
+            switch (this.gameWindow.getCurrentPlayer()) {
+                case PLAYER1:
+                    g2d.setColor(Color.RED);
+                    g2d.drawLine(0, 0, CASEWIDTH, CASEHEIGHT);
+                    g2d.drawLine(CASEWIDTH, 0, 0, CASEHEIGHT);
+                    this.setFilled(true);
+                    break;
+
+                case PLAYER2:
+                    g2d.setColor(Color.BLUE);
+                    g2d.drawOval(0, 0, CASEWIDTH, CASEHEIGHT);
+                    this.setFilled(true);
+                    break;
+
+                default:
+                    throw new IllegalArgumentException("Unexpected value: " + this.gameWindow.getCurrentPlayer());
             }
         }
 

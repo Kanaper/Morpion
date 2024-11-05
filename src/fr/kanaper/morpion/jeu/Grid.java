@@ -15,13 +15,13 @@ public class Grid extends JPanel {
     private static final int xStart = Game.WIDTH / 2 - GRIDSIZE / 2;
     private static final int yStart = Game.HEIGHT / 2 - GRIDSIZE / 2;
 
-    public Grid() {
+    public Grid(Game gameWindow) {
         this.setBounds(xStart, yStart, GRIDSIZE, GRIDSIZE);
         this.setLayout(null);
 
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 3; y++) {
-                this.add(new KanButtonGrid(xStart + x * GRIDSIZE / 3, yStart + y * GRIDSIZE / 3));
+                this.add(new KanButtonGrid(xStart + x * GRIDSIZE / 3, yStart + y * GRIDSIZE / 3, gameWindow));
             }
         }
     }

@@ -18,7 +18,7 @@ public class Game extends JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
 
-        Grid grid = new Grid();
+        Grid grid = new Grid(this);
         this.add(grid);
     }
 

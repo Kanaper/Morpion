@@ -3,23 +3,30 @@ package fr.kanaper.morpion.component;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import fr.kanaper.morpion.jeu.Game;
+import fr.kanaper.morpion.enums.Player;
+
 public class KanButtonGridListener implements ActionListener {
 
-    private KanButtonGrid button;
+    private Game gameWindow;
 
-    public KanButtonGridListener(KanButtonGrid button) {
-        this.button = button;
+    public KanButtonGridListener(Game gameWindow) {
+        this.gameWindow = gameWindow;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (!this.button.getFilled()) {
-            this.button.setFilled(true);
-            if (this.button.getPlayer()) {
-                this.button.setPlayer(false);
-            } else {
-                this.button.setPlayer(true);
-            }
+        switch (this.gameWindow.getCurrentPlayer()) {
+            case PLAYER1:
+                this.gameWindow.setCurrentPlayer(Player.PLAYER2);
+                break;
+
+            case PLAYER2:
+                this.gameWindow.setCurrentPlayer(Player.PLAYER1);
+                break;
+
+            default:
+                throw new IllegalArgumentException("Unexpected value: " + this.gameWindow.getCurrentPlayer());
         }
     }
 }
