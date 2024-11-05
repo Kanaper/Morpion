@@ -3,6 +3,7 @@ package fr.kanaper.morpion.menu;
 import java.awt.event.ActionListener;
 
 import fr.kanaper.morpion.enums.KanButtonType;
+import fr.kanaper.morpion.jeu.ChoosePlayer;
 import fr.kanaper.morpion.jeu.Game;
 
 import java.awt.event.ActionEvent;
@@ -21,7 +22,10 @@ public class MainMenuButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (this.type) {
             case PLAY:
-                new Game().setVisible(true);
+                Game game = new Game();
+                game.setVisible(true);
+                game.add(new ChoosePlayer(game));
+
                 break;
             case QUIT:
                 this.window.dispose();

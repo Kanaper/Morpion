@@ -2,10 +2,14 @@ package fr.kanaper.morpion.jeu;
 
 import javax.swing.JFrame;
 
+import fr.kanaper.morpion.enums.Player;
+
 public class Game extends JFrame {
 
     public static final int WIDTH = 1000;
     public static final int HEIGHT = 800;
+
+    private Player currentPlayer;
 
     public Game() {
         this.setTitle("Morpion");
@@ -16,6 +20,14 @@ public class Game extends JFrame {
 
         Grid grid = new Grid();
         this.add(grid);
+    }
+
+    public Player getCurrentPlayer() {
+        return this.currentPlayer;
+    }
+
+    public void setCurrentPlayer(Player player) {
+        this.currentPlayer = player;
     }
 
 }

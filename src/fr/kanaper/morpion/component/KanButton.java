@@ -13,6 +13,8 @@ public class KanButton extends JButton {
 
     private String buttonName;
     private boolean mouseClicked = false;
+    private int width;
+    private int height;
 
     public KanButton(String title, String buttonName) {
         super(title);
@@ -28,8 +30,11 @@ public class KanButton extends JButton {
         this.setOpaque(false);
     }
 
-    public KanButton(String buttonName) {
+    public KanButton(String buttonName, int width, int height) {
         this("", buttonName);
+
+        this.width = width;
+        this.height = height;
     }
 
     public boolean setMouseClicked(boolean clicked) {
@@ -47,31 +52,30 @@ public class KanButton extends JButton {
             float opacite = 0.2f;
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacite));
             g2d.setColor(Color.GRAY);
-            g2d.fillRoundRect(5, 5, 185, 85, 10, 10);
+            g2d.fillRoundRect(5, 5, this.width, this.height, 10, 10);
 
             opacite = 1f;
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacite));
             g2d.setStroke(new BasicStroke(3));
             g2d.setColor(Color.BLACK);
-            g2d.drawRoundRect(5, 5, 185, 85, 10, 10);
+            g2d.drawRoundRect(5, 5, this.width, this.height, 10, 10);
 
-            g2d.setFont(g2d.getFont().deriveFont(45f));
-            g2d.drawString(buttonName, 50, 60);
+            g2d.setFont(g2d.getFont().deriveFont((float) this.width / 4));
+            g2d.drawString(buttonName, this.width / 2 - 3 - this.width / 4, this.height / 2 + 3 + this.height / 4);
         } else {
             float opacite = 0.2f;
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacite));
-            g2d.setColor(Color.LIGHT_GRAY);
-            g2d.fillRoundRect(5, 5, 185, 85, 10, 10);
+            g2d.setColor(getBackground());
+            g2d.fillRoundRect(5, 5, this.width, this.height, 10, 10);
 
             opacite = 1f;
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacite));
             g2d.setStroke(new BasicStroke(3));
             g2d.setColor(Color.BLACK);
-            g2d.drawRoundRect(5, 5, 185, 85, 10, 10);
+            g2d.drawRoundRect(5, 5, this.width, this.height, 10, 10);
 
-            g2d.setFont(g2d.getFont().deriveFont(45f));
-            g2d.drawString(buttonName, 50, 60);
+            g2d.setFont(g2d.getFont().deriveFont((float) this.width / 4));
+            g2d.drawString(buttonName, this.width / 2 - 3 - this.width / 4, this.height / 2 + 3 + this.height / 4);
         }
-        g2d.dispose();
     }
 }

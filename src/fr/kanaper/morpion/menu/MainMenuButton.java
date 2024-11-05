@@ -14,12 +14,12 @@ public class MainMenuButton extends JPanel {
         super();
         this.setLayout(null);
 
-        KanButton play = new KanButton("Play");
+        KanButton play = new KanButton("Play", 185, 85);
         play.setBounds(PANWIDTH / 2 - 250, PANHEIGHT / 2 - 50, 200, 100);
         play.addActionListener(new MainMenuButtonListener(KanButtonType.PLAY, menuWindow));
         this.add(play);
 
-        KanButton quit = new KanButton("Quit");
+        KanButton quit = new KanButton("Quit", 185, 85);
         quit.setBounds(PANWIDTH / 2 + 50, PANHEIGHT / 2 - 50, 200, 100);
         quit.addActionListener(new MainMenuButtonListener(KanButtonType.QUIT, menuWindow));
         this.add(quit);
