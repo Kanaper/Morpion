@@ -10,7 +10,7 @@ import javax.swing.JButton;
 
 import fr.kanaper.morpion.jeu.Grid;
 import fr.kanaper.morpion.jeu.Game;
-import fr.kanaper.morpion.enums.Player;
+import fr.kanaper.morpion.jeu.Player;
 
 public class KanButtonGrid extends JButton {
 
@@ -20,8 +20,10 @@ public class KanButtonGrid extends JButton {
     private Game gameWindow;
     private Player player;
     private boolean buttonClicked = false;
+    private int gridX;
+    private int gridY;
 
-    public KanButtonGrid(int xStart, int yStart, Game gameWindow) {
+    public KanButtonGrid(int xStart, int yStart, Game gameWindow, int gridX, int gridY) {
         this.setBounds(xStart, yStart, CASESIZE, CASESIZE);
 
         this.setBorderPainted(false);
@@ -29,10 +31,20 @@ public class KanButtonGrid extends JButton {
         this.setContentAreaFilled(false);
 
         this.gameWindow = gameWindow;
+        this.gridX = gridX;
+        this.gridY = gridY;
 
         this.addMouseListener(new KanButtonGridMouseListener(this));
-        this.addActionListener(new KanButtonGridListener(gameWindow, this));
+        this.addActionListener(new KanButtonGridListener(gameWindow, this, this.player));
 
+    }
+
+    public int getGridX() {
+        return this.gridX;
+    }
+
+    public int getGridY() {
+        return this.gridY;
     }
 
     public void setMouseInButton(boolean mousIn) {
@@ -91,7 +103,7 @@ public class KanButtonGrid extends JButton {
             }
 
             if (getButtonClicked()) {
-                switch (this.player) {
+                switch (this.player.getPlayerType()) {
                     case PLAYER1:
                         g2d.setColor(Color.RED);
                         g2d.drawLine(0, 0, CASESIZE, CASESIZE);
@@ -113,7 +125,7 @@ public class KanButtonGrid extends JButton {
         } else {
             g2d.setColor(Color.WHITE);
             g2d.fillRect(0, 0, CASESIZE, CASESIZE);
-            switch (this.player) {
+            switch (this.player.getPlayerType()) {
                 case PLAYER1:
                     g2d.setColor(Color.RED);
                     g2d.drawLine(0, 0, CASESIZE, CASESIZE);

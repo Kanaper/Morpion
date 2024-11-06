@@ -4,7 +4,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 
 import fr.kanaper.morpion.component.KanButton;
-import fr.kanaper.morpion.enums.Player;
+import fr.kanaper.morpion.enums.PlayerType;
 
 public class ChoosePlayer extends JDialog {
 
@@ -23,12 +23,12 @@ public class ChoosePlayer extends JDialog {
 
         KanButton blue = new KanButton("Bleu", 85, 35);
         blue.setBounds(75, 200, 100, 50);
-        blue.addActionListener(new ChoosePlayerButtonListener(this, Player.PLAYER1, gameWindow));
+        blue.addActionListener(new ChoosePlayerButtonListener(this, PlayerType.PLAYER1, gameWindow));
         this.add(blue);
 
         KanButton red = new KanButton("Rouge", 85, 35);
         red.setBounds(225, 200, 100, 50);
-        red.addActionListener(new ChoosePlayerButtonListener(this, Player.PLAYER2, gameWindow));
+        red.addActionListener(new ChoosePlayerButtonListener(this, PlayerType.PLAYER2, gameWindow));
         this.add(red);
 
         this.setVisible(true);

@@ -21,7 +21,7 @@ public class Grid extends JPanel {
 
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 3; y++) {
-                this.add(new KanButtonGrid(xStart + x * GRIDSIZE / 3, yStart + y * GRIDSIZE / 3, gameWindow));
+                this.add(new KanButtonGrid(xStart + x * GRIDSIZE / 3, yStart + y * GRIDSIZE / 3, gameWindow, x, y));
             }
         }
     }

@@ -3,15 +3,15 @@ package fr.kanaper.morpion.jeu;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import fr.kanaper.morpion.enums.Player;
+import fr.kanaper.morpion.enums.PlayerType;
 
 public class ChoosePlayerButtonListener implements ActionListener {
 
-    private Player player;
+    private PlayerType player;
     private Game gameWindow;
     private ChoosePlayer modalWindow;
 
-    public ChoosePlayerButtonListener(ChoosePlayer modalWindow, Player player, Game gameWindow) {
+    public ChoosePlayerButtonListener(ChoosePlayer modalWindow, PlayerType player, Game gameWindow) {
         this.player = player;
         this.gameWindow = gameWindow;
         this.modalWindow = modalWindow;
@@ -21,12 +21,12 @@ public class ChoosePlayerButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (this.player) {
-            case Player.PLAYER1:
-                this.gameWindow.setCurrentPlayer(Player.PLAYER1);
+            case PlayerType.PLAYER1:
+                this.gameWindow.setCurrentPlayer(this.gameWindow.player1);
                 this.modalWindow.dispose();
                 break;
-            case Player.PLAYER2:
-                this.gameWindow.setCurrentPlayer(Player.PLAYER2);
+            case PlayerType.PLAYER2:
+                this.gameWindow.setCurrentPlayer(this.gameWindow.player2);
                 this.modalWindow.dispose();
                 break;
             default:

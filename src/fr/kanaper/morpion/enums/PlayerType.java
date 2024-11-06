@@ -1,6 +1,6 @@
 package fr.kanaper.morpion.enums;
 
-public enum Player {
+public enum PlayerType {
     PLAYER1,
     PLAYER2
 
