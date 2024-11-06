@@ -10,18 +10,19 @@ import javax.swing.JButton;
 
 import fr.kanaper.morpion.jeu.Grid;
 import fr.kanaper.morpion.jeu.Game;
+import fr.kanaper.morpion.enums.Player;
 
 public class KanButtonGrid extends JButton {
 
-    private static final int CASEWIDTH = Grid.GRIDSIZE / 3;
-    private static final int CASEHEIGHT = Grid.GRIDSIZE / 3;
+    private static final int CASESIZE = Grid.GRIDSIZE / 3;
     private boolean mouseIn = false;
     private boolean filled = false;
     private Game gameWindow;
-    private boolean mouseClicked = false;
+    private Player player;
+    private boolean buttonClicked = false;
 
     public KanButtonGrid(int xStart, int yStart, Game gameWindow) {
-        this.setBounds(xStart, yStart, CASEWIDTH, CASEHEIGHT);
+        this.setBounds(xStart, yStart, CASESIZE, CASESIZE);
 
         this.setBorderPainted(false);
         this.setFocusPainted(false);
@@ -30,7 +31,7 @@ public class KanButtonGrid extends JButton {
         this.gameWindow = gameWindow;
 
         this.addMouseListener(new KanButtonGridMouseListener(this));
-        this.addActionListener(new KanButtonGridListener(gameWindow));
+        this.addActionListener(new KanButtonGridListener(gameWindow, this));
 
     }
 
@@ -50,80 +51,86 @@ public class KanButtonGrid extends JButton {
         this.filled = filled;
     }
 
-    public boolean getMouseClicked() {
-        return this.mouseClicked;
+    public boolean getButtonClicked() {
+        return this.buttonClicked;
     }
 
-    public void setMouseClicked(boolean mouseClicked) {
-        this.mouseClicked = mouseClicked;
+    public void setButtonClicked(boolean buttonClicked) {
+        if (this.buttonClicked) {
+            return;
+        } else {
+            this.buttonClicked = buttonClicked;
+            this.player = this.gameWindow.getCurrentPlayer();
+        }
+
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+
         Graphics2D g2d = (Graphics2D) g;
+        float opacite = 0.2f;
 
         g2d.setStroke(new BasicStroke(5));
 
-        if (getMouseInButton() == true && getFilled() == false) {
-            float opacite = 0.2f;
-            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacite));
-            g2d.setColor(Color.GRAY);
-            g2d.fillRect(0, 0, CASEWIDTH, CASEHEIGHT);
-
-            g2d.setColor(Color.BLACK);
-            g2d.drawRect(0, 0, CASEWIDTH, CASEHEIGHT);
-        } else {
-            if (getFilled() == false) {
-                g2d.setColor(Color.WHITE);
-                g2d.fillRect(0, 0, CASEWIDTH, CASEHEIGHT);
+        if (!getFilled()) {
+            if (getMouseInButton()) {
+                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacite));
+                g2d.setColor(Color.GRAY);
+                g2d.fillRect(0, 0, CASESIZE, CASESIZE);
 
                 g2d.setColor(Color.BLACK);
-                g2d.drawRect(0, 0, CASEWIDTH, CASEHEIGHT);
+                g2d.drawRect(0, 0, CASESIZE, CASESIZE);
             } else {
                 g2d.setColor(Color.WHITE);
-                g2d.fillRect(0, 0, CASEWIDTH, CASEHEIGHT);
-                switch (this.gameWindow.getCurrentPlayer()) {
+                g2d.fillRect(0, 0, CASESIZE, CASESIZE);
+
+                g2d.setColor(Color.BLACK);
+                g2d.drawRect(0, 0, CASESIZE, CASESIZE);
+            }
+
+            if (getButtonClicked()) {
+                switch (this.player) {
                     case PLAYER1:
                         g2d.setColor(Color.RED);
-                        g2d.drawLine(0, 0, CASEWIDTH, CASEHEIGHT);
-                        g2d.drawLine(CASEWIDTH, 0, 0, CASEHEIGHT);
+                        g2d.drawLine(0, 0, CASESIZE, CASESIZE);
+                        g2d.drawLine(CASESIZE, 0, 0, CASESIZE);
                         this.setFilled(true);
                         break;
 
                     case PLAYER2:
                         g2d.setColor(Color.BLUE);
-                        g2d.drawOval(0, 0, CASEWIDTH, CASEHEIGHT);
+                        g2d.drawOval(0, 0, CASESIZE, CASESIZE);
                         this.setFilled(true);
                         break;
 
                     default:
                         throw new IllegalArgumentException("Unexpected value: " + this.gameWindow.getCurrentPlayer());
                 }
-                g2d.setColor(Color.BLACK);
-                g2d.drawRect(0, 0, CASEWIDTH, CASEHEIGHT);
             }
-        }
 
-        if (getMouseClicked() == true && getMouseInButton() == true && getFilled() == false) {
-
-            switch (this.gameWindow.getCurrentPlayer()) {
+        } else {
+            g2d.setColor(Color.WHITE);
+            g2d.fillRect(0, 0, CASESIZE, CASESIZE);
+            switch (this.player) {
                 case PLAYER1:
                     g2d.setColor(Color.RED);
-                    g2d.drawLine(0, 0, CASEWIDTH, CASEHEIGHT);
-                    g2d.drawLine(CASEWIDTH, 0, 0, CASEHEIGHT);
-                    this.setFilled(true);
+                    g2d.drawLine(0, 0, CASESIZE, CASESIZE);
+                    g2d.drawLine(CASESIZE, 0, 0, CASESIZE);
                     break;
 
                 case PLAYER2:
                     g2d.setColor(Color.BLUE);
-                    g2d.drawOval(0, 0, CASEWIDTH, CASEHEIGHT);
-                    this.setFilled(true);
+                    g2d.drawOval(0, 0, CASESIZE, CASESIZE);
                     break;
 
                 default:
-                    throw new IllegalArgumentException("Unexpected value: " + this.gameWindow.getCurrentPlayer());
+                    throw new IllegalArgumentException(
+                            "Unexpected value: " + this.gameWindow.getCurrentPlayer());
             }
+            g2d.setColor(Color.BLACK);
+            g2d.drawRect(0, 0, CASESIZE, CASESIZE);
         }
 
     }

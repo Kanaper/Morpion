@@ -13,8 +13,6 @@ public class KanButtonGridMouseListener implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        this.button.setMouseClicked(true);
-        this.button.repaint();
     }
 
     @Override
