@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 
 import fr.kanaper.morpion.jeu.Game;
 import fr.kanaper.morpion.jeu.Player;
-import fr.kanaper.morpion.enums.PlayerType;
 
 public class KanButtonGridListener implements ActionListener {
 
@@ -21,27 +20,14 @@ public class KanButtonGridListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (!this.button.getFilled()) {
-            switch (this.gameWindow.getCurrentPlayer().getPlayerType()) {
-                case PLAYER1:
-                    this.gameWindow.nextPlayer();
-                    break;
-
-                case PLAYER2:
-                    this.gameWindow.nextPlayer();
-                    break;
-
-                default:
-                    throw new IllegalArgumentException("Unexpected value: " + this.gameWindow.getCurrentPlayer());
-            }
-        }
-        if (this.button.getMouseInButton()) {
-            this.button.setButtonClicked(true);
-            this.button.setMouseInButton(false);
-            this.button.repaint();
-
+            this.gameWindow.nextPlayer();
             this.gameWindow.getCurrentPlayer().posList[this.button.getGridX()][this.button.getGridY()] = 1;
-
+            this.button.setPlayer(this.gameWindow.getCurrentPlayer());
+            this.button.setFilled(true);
+            this.button.repaint();
             this.gameWindow.checkEndGame(this.gameWindow.getCurrentPlayer());
+            System.out.println("je suis le bouton " + this.button.getGridX() + " " + this.button.getGridY()
+                    + " et je lance la recherche");
         }
     }
 }

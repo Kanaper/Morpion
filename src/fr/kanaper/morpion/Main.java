@@ -1,6 +1,6 @@
 package fr.kanaper.morpion;
 
-import fr.kanaper.morpion.menu.MainMenuWindow;
+import fr.kanaper.morpion.mainmenu.MainMenuWindow;
 
 public class Main {
 

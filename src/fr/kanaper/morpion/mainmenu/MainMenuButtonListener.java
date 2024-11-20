@@ -1,4 +1,4 @@
-package fr.kanaper.morpion.menu;
+package fr.kanaper.morpion.mainmenu;
 
 import java.awt.event.ActionListener;
 
