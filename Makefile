@@ -29,8 +29,3 @@ javadoc:
 	@echo "Generating javadoc..."
 	@javadoc -d $(DOCDIR) -sourcepath src -subpackages $(PACKAGE)
 	@echo "Done."
-
-jar:
-	@echo "Creating jar..."
-	@jar cvfe $(PACKAGE).jar $(PACKAGE).$(ENTRY) -C $(BUILDDIR) $(PACKAGE)
-	@echo "Done."

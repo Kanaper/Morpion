@@ -6,11 +6,24 @@ import java.awt.event.ActionEvent;
 import fr.kanaper.morpion.jeu.Game;
 import fr.kanaper.morpion.jeu.Player;
 
+/**
+ * classe qui permet de gérer les actions des boutons de la grille
+ * 
+ * @version 1.0
+ * @author Kanaper
+ */
 public class KanButtonGridListener implements ActionListener {
 
     private Game gameWindow;
     private KanButtonGrid button;
 
+    /**
+     * Constructeur de la classe KanButtonGridListener
+     * 
+     * @param gameWindow la fenêtre de jeu
+     * @param button     le bouton de la grille
+     * @param player     le joueur
+     */
     public KanButtonGridListener(Game gameWindow, KanButtonGrid button, Player player) {
         this.gameWindow = gameWindow;
         this.button = button;
@@ -26,8 +39,6 @@ public class KanButtonGridListener implements ActionListener {
             this.button.setFilled(true);
             this.button.repaint();
             this.gameWindow.checkEndGame(this.gameWindow.getCurrentPlayer());
-            System.out.println("je suis le bouton " + this.button.getGridX() + " " + this.button.getGridY()
-                    + " et je lance la recherche");
         }
     }
 }

@@ -6,16 +6,22 @@ import javax.swing.JLabel;
 import fr.kanaper.morpion.component.KanButton;
 import fr.kanaper.morpion.enums.PlayerType;
 
+/**
+ * Classe permettant de choisir le joueur
+ * 
+ * @version 1.0
+ * @author Kanaper
+ */
 public class ChoosePlayer extends JDialog {
 
     public ChoosePlayer(Game gameWindow) {
-        super(gameWindow, "choisissez une couleur", true);
+        super(gameWindow, "Choix du joueur", true);
         this.setSize(400, 400);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setLayout(null);
 
-        JLabel title = new JLabel("Choisissez une couleur");
+        JLabel title = new JLabel("Choisissez une forme");
         title.setBounds(0, 50, 400, 100);
         title.setFont(this.getFont().deriveFont(28f));
         title.setHorizontalAlignment(JLabel.CENTER);
