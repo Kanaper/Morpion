@@ -14,7 +14,7 @@ import fr.kanaper.morpion.enums.PlayerType;
  */
 public class ChoosePlayer extends JDialog {
 
-    public ChoosePlayer(Game gameWindow) {
+    public ChoosePlayer(Game gameWindow, Grid grid) {
         super(gameWindow, "Choix du joueur", true);
         this.setSize(400, 400);
         this.setLocationRelativeTo(null);
@@ -23,18 +23,18 @@ public class ChoosePlayer extends JDialog {
 
         JLabel title = new JLabel("Choisissez une forme");
         title.setBounds(0, 50, 400, 100);
-        title.setFont(this.getFont().deriveFont(28f));
+        title.setFont(title.getFont().deriveFont(28f));
         title.setHorizontalAlignment(JLabel.CENTER);
         this.add(title);
 
         KanButton blue = new KanButton("Bleu", 85, 35);
         blue.setBounds(75, 200, 100, 50);
-        blue.addActionListener(new ChoosePlayerButtonListener(this, PlayerType.PLAYER1, gameWindow));
+        blue.addActionListener(new ChoosePlayerButtonListener(this, PlayerType.CROSS, gameWindow, grid));
         this.add(blue);
 
         KanButton red = new KanButton("Rouge", 85, 35);
         red.setBounds(225, 200, 100, 50);
-        red.addActionListener(new ChoosePlayerButtonListener(this, PlayerType.PLAYER2, gameWindow));
+        red.addActionListener(new ChoosePlayerButtonListener(this, PlayerType.CIRCLE, gameWindow, grid));
         this.add(red);
 
         this.setVisible(true);

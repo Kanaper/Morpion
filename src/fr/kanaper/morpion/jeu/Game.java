@@ -20,6 +20,7 @@ public class Game extends JFrame {
     public Player player2;
 
     private Player currentPlayer;
+    private Grid grid;
 
     /**
      * constructeur de la classe Game, initialise la fenêtre de jeu
@@ -34,11 +35,22 @@ public class Game extends JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
 
-        this.player1 = new Player(PlayerType.PLAYER1);
-        this.player2 = new Player(PlayerType.PLAYER2);
+        this.player1 = new Player(PlayerType.CROSS);
+        this.player2 = new Player(PlayerType.CIRCLE);
 
-        Grid grid = new Grid(this);
+        this.grid = new Grid(this);
+
+        new ChoosePlayer(this, grid);
         this.add(grid);
+    }
+
+    /**
+     * retourne la grille de jeu
+     * 
+     * @return Grid
+     */
+    public Grid getGrid() {
+        return this.grid;
     }
 
     /**

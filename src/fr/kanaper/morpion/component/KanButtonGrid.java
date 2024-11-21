@@ -132,7 +132,7 @@ public class KanButtonGrid extends JButton {
             if (getMouseInButton()) {
                 this.player = gameWindow.getCurrentPlayer();
                 switch (this.player.getPlayerType()) {
-                    case PLAYER1:
+                    case CROSS:
                         g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacite));
                         g2d.setColor(Color.GRAY);
                         g2d.fillRect(0, 0, CASESIZE, CASESIZE);
@@ -144,7 +144,7 @@ public class KanButtonGrid extends JButton {
                         g2d.drawRect(0, 0, CASESIZE, CASESIZE);
                         break;
 
-                    case PLAYER2:
+                    case CIRCLE:
                         g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacite));
                         g2d.setColor(Color.GRAY);
                         g2d.fillRect(0, 0, CASESIZE, CASESIZE);
@@ -167,7 +167,7 @@ public class KanButtonGrid extends JButton {
             }
         } else {
             switch (this.player.getPlayerType()) {
-                case PLAYER1:
+                case CROSS:
                     g2d.setColor(Color.WHITE);
                     g2d.fillRect(0, 0, CASESIZE, CASESIZE);
                     g2d.setColor(Color.RED);
@@ -177,7 +177,7 @@ public class KanButtonGrid extends JButton {
                     g2d.drawRect(0, 0, CASESIZE, CASESIZE);
                     break;
 
-                case PLAYER2:
+                case CIRCLE:
                     g2d.setColor(Color.WHITE);
                     g2d.fillRect(0, 0, CASESIZE, CASESIZE);
                     g2d.setColor(Color.BLUE);

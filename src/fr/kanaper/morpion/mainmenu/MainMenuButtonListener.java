@@ -25,7 +25,6 @@ public class MainMenuButtonListener implements ActionListener {
                 Game game = new Game();
                 game.setVisible(true);
                 this.window.dispose();
-                new ChoosePlayer(game);
                 break;
             case QUIT:
                 this.window.dispose();

@@ -40,6 +40,7 @@ public class KanButtonGridListener implements ActionListener {
             this.button.repaint();
             this.gameWindow.checkEndGame(this.gameWindow.getCurrentPlayer());
             this.gameWindow.nextPlayer();
+            this.gameWindow.getGrid().repaint();
         }
     }
 }

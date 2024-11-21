@@ -10,24 +10,28 @@ public class ChoosePlayerButtonListener implements ActionListener {
     private PlayerType player;
     private Game gameWindow;
     private ChoosePlayer modalWindow;
+    private Grid grid;
 
-    public ChoosePlayerButtonListener(ChoosePlayer modalWindow, PlayerType player, Game gameWindow) {
+    public ChoosePlayerButtonListener(ChoosePlayer modalWindow, PlayerType player, Game gameWindow, Grid grid) {
         this.player = player;
         this.gameWindow = gameWindow;
         this.modalWindow = modalWindow;
+        this.grid = grid;
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (this.player) {
-            case PlayerType.PLAYER1:
+            case PlayerType.CROSS:
                 this.gameWindow.setCurrentPlayer(this.gameWindow.player1);
                 this.modalWindow.dispose();
+                this.grid.repaint();
                 break;
-            case PlayerType.PLAYER2:
+            case PlayerType.CIRCLE:
                 this.gameWindow.setCurrentPlayer(this.gameWindow.player2);
                 this.modalWindow.dispose();
+                this.grid.repaint();
                 break;
             default:
                 throw new IllegalArgumentException("invalid player");
