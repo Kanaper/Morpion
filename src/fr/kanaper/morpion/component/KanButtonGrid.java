@@ -124,18 +124,40 @@ public class KanButtonGrid extends JButton {
         super.paintComponent(g);
 
         Graphics2D g2d = (Graphics2D) g;
-        float opacite = 0.2f;
+        float opacite = 0.1f;
 
         g2d.setStroke(new BasicStroke(5));
 
         if (!getFilled()) {
             if (getMouseInButton()) {
-                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacite));
-                g2d.setColor(Color.GRAY);
-                g2d.fillRect(0, 0, CASESIZE, CASESIZE);
+                this.player = gameWindow.getCurrentPlayer();
+                switch (this.player.getPlayerType()) {
+                    case PLAYER1:
+                        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacite));
+                        g2d.setColor(Color.GRAY);
+                        g2d.fillRect(0, 0, CASESIZE, CASESIZE);
+                        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
+                        g2d.setColor(Color.RED);
+                        g2d.drawLine(0, 0, CASESIZE, CASESIZE);
+                        g2d.drawLine(CASESIZE, 0, 0, CASESIZE);
+                        g2d.setColor(Color.BLACK);
+                        g2d.drawRect(0, 0, CASESIZE, CASESIZE);
+                        break;
 
-                g2d.setColor(Color.BLACK);
-                g2d.drawRect(0, 0, CASESIZE, CASESIZE);
+                    case PLAYER2:
+                        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacite));
+                        g2d.setColor(Color.GRAY);
+                        g2d.fillRect(0, 0, CASESIZE, CASESIZE);
+                        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
+                        g2d.setColor(Color.BLUE);
+                        g2d.drawOval(0, 0, CASESIZE, CASESIZE);
+                        g2d.setColor(Color.BLACK);
+                        g2d.drawRect(0, 0, CASESIZE, CASESIZE);
+                        break;
+
+                    default:
+                        throw new IllegalArgumentException("Unexpected value: " + this.gameWindow.getCurrentPlayer());
+                }
             } else {
                 g2d.setColor(Color.WHITE);
                 g2d.fillRect(0, 0, CASESIZE, CASESIZE);

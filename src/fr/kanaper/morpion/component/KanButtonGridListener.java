@@ -33,12 +33,13 @@ public class KanButtonGridListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (!this.button.getFilled()) {
-            this.gameWindow.nextPlayer();
+            this.gameWindow.getCurrentPlayer().setMove(this.gameWindow.getCurrentPlayer().getMove() + 1);
             this.gameWindow.getCurrentPlayer().posList[this.button.getGridX()][this.button.getGridY()] = 1;
             this.button.setPlayer(this.gameWindow.getCurrentPlayer());
             this.button.setFilled(true);
             this.button.repaint();
             this.gameWindow.checkEndGame(this.gameWindow.getCurrentPlayer());
+            this.gameWindow.nextPlayer();
         }
     }
 }

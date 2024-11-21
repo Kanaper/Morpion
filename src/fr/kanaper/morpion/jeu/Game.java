@@ -90,6 +90,9 @@ public class Game extends JFrame {
         if (player.posList[0][2] == 1 && player.posList[1][1] == 1 && player.posList[2][0] == 1) {
             new endMenu(this, player);
         }
+        if (player.getMove() == 5) {
+            new endMenu(this, null);
+        }
     }
 
 }
