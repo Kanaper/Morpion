@@ -4,6 +4,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 
 import fr.kanaper.morpion.component.KanButton;
+import fr.kanaper.morpion.enums.KanButtonType;
 import fr.kanaper.morpion.enums.PlayerType;
 
 /**
@@ -14,9 +15,10 @@ import fr.kanaper.morpion.enums.PlayerType;
  */
 public class ChoosePlayer extends JDialog {
 
-    public ChoosePlayer(Game gameWindow, Grid grid) {
+    public ChoosePlayer(Game gameWindow) {
         super(gameWindow, "Choix du joueur", true);
         this.setSize(400, 400);
+        this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setLayout(null);
@@ -27,15 +29,19 @@ public class ChoosePlayer extends JDialog {
         title.setHorizontalAlignment(JLabel.CENTER);
         this.add(title);
 
-        KanButton blue = new KanButton("Bleu", 85, 35);
-        blue.setBounds(75, 200, 100, 50);
-        blue.addActionListener(new ChoosePlayerButtonListener(this, PlayerType.CROSS, gameWindow, grid));
-        this.add(blue);
+        KanButton cross = new KanButton("Croix", KanButtonType.CROSS, gameWindow);
+        cross.setWidth(80);
+        cross.setHeight(30);
+        cross.setBounds(75, 200, 80, 30);
+        cross.addActionListener(new ChoosePlayerButtonListener(this, PlayerType.CROSS, gameWindow));
+        this.add(cross);
 
-        KanButton red = new KanButton("Rouge", 85, 35);
-        red.setBounds(225, 200, 100, 50);
-        red.addActionListener(new ChoosePlayerButtonListener(this, PlayerType.CIRCLE, gameWindow, grid));
-        this.add(red);
+        KanButton circle = new KanButton("Cercle", KanButtonType.CIRCLE, gameWindow);
+        circle.setWidth(80);
+        circle.setHeight(30);
+        circle.setBounds(225, 200, 80, 30);
+        circle.addActionListener(new ChoosePlayerButtonListener(this, PlayerType.CIRCLE, gameWindow));
+        this.add(circle);
 
         this.setVisible(true);
     }

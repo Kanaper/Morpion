@@ -3,11 +3,11 @@ package fr.kanaper.morpion.component;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 
-public class KanButtonListener implements MouseListener {
+public class KanButtonMouseListener implements MouseListener {
 
     private KanButton button;
 
-    public KanButtonListener(KanButton button) {
+    public KanButtonMouseListener(KanButton button) {
         this.button = button;
     }
 
@@ -17,13 +17,13 @@ public class KanButtonListener implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        this.button.setMouseClicked(true);
+        this.button.setMouseIn(true);
         this.button.repaint();
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        this.button.setMouseClicked(false);
+        this.button.setMouseIn(false);
         this.button.repaint();
     }
 

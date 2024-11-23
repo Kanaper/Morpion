@@ -52,4 +52,16 @@ public class Player {
     public PlayerType getPlayerType() {
         return this.playerType;
     }
+
+    @Override
+    public String toString() {
+        switch (this.playerType) {
+            case CROSS:
+                return "Croix";
+            case CIRCLE:
+                return "Cercles";
+            default:
+                throw new IllegalArgumentException("Type de joueur inconnu");
+        }
+    }
 }

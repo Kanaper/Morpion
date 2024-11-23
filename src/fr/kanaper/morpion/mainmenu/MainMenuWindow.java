@@ -16,13 +16,12 @@ public class MainMenuWindow extends JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setLayout(null);
-        this.getContentPane().setBackground(new Color(200, 200, 200));
 
         MainMenuTitle title = new MainMenuTitle();
         this.add(title);
 
-        MainMenuButton button = new MainMenuButton(this);
-        button.setBounds(100, 300, WIDTH - 200, HEIGHT - 400);
-        this.add(button);
+        MainMenuButtonPanel buttonPanel = new MainMenuButtonPanel(this);
+        buttonPanel.setBounds(100, 300, WIDTH - 200, HEIGHT - 400);
+        this.add(buttonPanel);
     }
 }

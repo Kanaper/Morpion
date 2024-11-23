@@ -35,12 +35,11 @@ public class Game extends JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
 
+        this.grid = new Grid(this);
         this.player1 = new Player(PlayerType.CROSS);
         this.player2 = new Player(PlayerType.CIRCLE);
+        new ChoosePlayer(this);
 
-        this.grid = new Grid(this);
-
-        new ChoosePlayer(this, grid);
         this.add(grid);
     }
 
@@ -98,11 +97,9 @@ public class Game extends JFrame {
         }
         if (player.posList[0][0] == 1 && player.posList[1][1] == 1 && player.posList[2][2] == 1) {
             new endMenu(this, player);
-        }
-        if (player.posList[0][2] == 1 && player.posList[1][1] == 1 && player.posList[2][0] == 1) {
+        } else if (player.posList[0][2] == 1 && player.posList[1][1] == 1 && player.posList[2][0] == 1) {
             new endMenu(this, player);
-        }
-        if (player.getMove() == 5) {
+        } else if (player.getMove() == 5) {
             new endMenu(this, null);
         }
     }
