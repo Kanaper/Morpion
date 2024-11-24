@@ -25,7 +25,7 @@ public class KanButton extends JButton {
 
     private int width;
     private int height;
-    private int scale;
+    private double scale;
 
     /**
      * Constructeur de la classe KanButton
@@ -47,19 +47,34 @@ public class KanButton extends JButton {
         this.setOpaque(false);
     }
 
+    /**
+     * sert à indiquer le nom du bouton
+     * 
+     * @param buttonName nom du bouton
+     */
     public void setScale() {
         if (this.width <= 100) {
-            this.scale = 3;
-        } else {
-            this.scale = this.buttonName.length() * 2;
+            this.scale = this.buttonName.length() - 3;
+        } else if (this.width >= 200) {
+            this.scale = this.buttonName.length() * 7;
         }
     }
 
+    /**
+     * sert à indiquer la largeur du bouton
+     * 
+     * @param width largeur du bouton
+     */
     public void setWidth(int width) {
         this.width = width;
         setScale();
     }
 
+    /**
+     * sert à indiquer la hauteur du bouton
+     * 
+     * @param height hauteur du bouton
+     */
     public void setHeight(int height) {
         this.height = height;
     }
@@ -110,7 +125,7 @@ public class KanButton extends JButton {
         if (getMouseIn()) {
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.2f));
         } else {
-            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f));
+            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
         }
 
         g2d.setColor(Color.LIGHT_GRAY);
@@ -122,8 +137,9 @@ public class KanButton extends JButton {
         g2d.drawRoundRect(1, 1, this.width - 3, this.height - 3, 10, 10);
 
         g2d.setFont(g2d.getFont().deriveFont((float) this.height / 3));
-        g2d.drawString(this.buttonName, this.width / 2 - (this.scale * this.buttonName.length()),
-                this.height / 2 + this.scale);
+        g2d.drawString(this.buttonName,
+                (int) (this.width / 2 - (g2d.getFont().getSize() + (this.scale + this.buttonName.length()) / 2)),
+                (int) (this.height / 2 + (g2d.getFont().getSize()) / 4));
 
     }
 }

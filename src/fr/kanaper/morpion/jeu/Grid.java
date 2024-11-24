@@ -9,6 +9,12 @@ import java.awt.Graphics2D;
 import java.awt.Graphics;
 import java.awt.BasicStroke;
 
+/**
+ * Classe Grid permettant de créer la grille de jeu
+ * 
+ * @version 1.0
+ * @autor Kanaper
+ */
 public class Grid extends JPanel {
 
     public static final int GRIDSIZE = 500;
@@ -17,6 +23,11 @@ public class Grid extends JPanel {
 
     private Game gameWindow;
 
+    /**
+     * Constructeur de la classe Grid
+     * 
+     * @param gameWindow fenêtre de jeu
+     */
     public Grid(Game gameWindow) {
         this.setBounds(xStart - 5, yStart - 5, GRIDSIZE + 7, GRIDSIZE + 7);
         this.setLayout(null);

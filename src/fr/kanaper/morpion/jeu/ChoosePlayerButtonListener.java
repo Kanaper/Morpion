@@ -5,12 +5,26 @@ import java.awt.event.ActionEvent;
 
 import fr.kanaper.morpion.enums.PlayerType;
 
+/**
+ * classe ChoosePlayerButtonListener permettant de gérer les événements sur les
+ * boutons de choix de joueur
+ * 
+ * @version 1.0
+ * @autor Kanaper
+ */
 public class ChoosePlayerButtonListener implements ActionListener {
 
     private PlayerType player;
     private Game gameWindow;
     private ChoosePlayer modalWindow;
 
+    /**
+     * Constructeur de la classe ChoosePlayerButtonListener
+     * 
+     * @param modalWindow fenêtre modale
+     * @param player      joueur
+     * @param gameWindow  fenêtre de jeu
+     */
     public ChoosePlayerButtonListener(ChoosePlayer modalWindow, PlayerType player, Game gameWindow) {
         this.player = player;
         this.gameWindow = gameWindow;

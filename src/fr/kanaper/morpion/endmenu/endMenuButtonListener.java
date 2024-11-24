@@ -17,6 +17,12 @@ public class endMenuButtonListener implements ActionListener {
     private KanButtonType type;
     private Game gameWindow;
 
+    /**
+     * Constructeur de la classe endMenuButtonListener
+     * 
+     * @param type
+     * @param gameWindow
+     */
     public endMenuButtonListener(KanButtonType type, Game gameWindow) {
         this.type = type;
         this.gameWindow = gameWindow;

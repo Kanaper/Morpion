@@ -3,6 +3,12 @@ package fr.kanaper.morpion.component;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 
+/**
+ * classe permettant de gérer les événements souris sur un bouton
+ * 
+ * @version 1.0
+ * @autor Kanaper
+ */
 public class KanButtonMouseListener implements MouseListener {
 
     private KanButton button;

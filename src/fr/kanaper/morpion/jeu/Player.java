@@ -57,9 +57,9 @@ public class Player {
     public String toString() {
         switch (this.playerType) {
             case CROSS:
-                return "Croix";
+                return "croix";
             case CIRCLE:
-                return "Cercles";
+                return "cercles";
             default:
                 throw new IllegalArgumentException("Type de joueur inconnu");
         }
